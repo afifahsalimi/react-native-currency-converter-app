@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import HomeScreen from '@screens/Home'
-import CurrencyScreen from '@screens/Currency'
+import CurrencyScreen from '@screens/CurrencyList'
 import SettingScreen from '@screens/Setting'
 import ThemeScreen from '@screens/Theme'
 

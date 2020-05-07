@@ -13,28 +13,29 @@ import { Icon } from 'react-native-elements'
 import Colors from '@utils/colors'
 
 const CurrencyTo = (props) => {
+    const { currency, onPress, descText, value } = props
     return (
         <View style={[styles.boxContainer, styles.shadow]}>
             <TextInput
+                editable={false}
                 style={styles.value2TInput}
-                onChangeText={props.onChangeText}
-                value={props.value}
+                value={value}
             />
             <View style={styles.currencyContainer}>
                 <View style={styles.flagContainer}>
                     <Image
                         style={styles.flagImage}
-                        source={require('@assets/flag_mas.png')}
+                        source={currency.image}
                         resizeMode='cover'
                     />
-                    <Text style={styles.initialText}>MYR</Text>
+                    <Text style={styles.initialText}>{currency.base}</Text>
                 </View>
                 <TouchableOpacity
                     style={styles.optionButton}
-                    onPress={props.onPress}
+                    onPress={onPress}
                     activeOpacity={0.8}
                 >
-                    <Text style={styles.descText}>Malaysia Ringgit</Text>
+                    <Text style={styles.descText}>{currency.desc}</Text>
                     <Icon
                         name='down'
                         type='antdesign'

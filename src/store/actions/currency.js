@@ -7,13 +7,41 @@ export const GET_INITIAL_CONVERSION = 'GET_INITIAL_CONVERSION'
 export const CONVERSION_RESULT = 'CONVERSION_RESULT'
 export const CONVERSION_ERROR = 'CONVERSION_ERROR'
 
+import api from '@services/httpServices'
+
+export const fetchLatestConversionRates = (data) => {
+    console.log('GET CONVERSION RATES')
+    return async (dispatch, getState) => {
+        try {
+            let currency = data
+            if (currency == undefined) {
+                currency = getState().currency.baseCurrency
+            }
+            const response = await api.getLatestConversionRates(currency)
+            const result = response.data
+            if (result.error) {
+                dispatch({
+                    type: CONVERSION_ERROR,
+                    error: result.error
+                })
+            }
+            else {
+                dispatch({
+                    type: CONVERSION_RESULT,
+                    result
+                })
+            }
+        } catch (error) {
+            dispatch({
+                type: CONVERSION_ERROR,
+                error: error.message
+            })
+        }
+    }
+}
+
 export const getInitialConversion = () => ({
     type: GET_INITIAL_CONVERSION,
-})
-
-export const changeCurrencyAmount = amount => ({
-    type: CHANGE_CURRENCY_AMOUNT,
-    amount: parseFloat(amount),
 })
 
 export const swapCurrency = () => ({
@@ -23,6 +51,11 @@ export const swapCurrency = () => ({
 export const changeBaseCurrency = currency => ({
     type: CHANGE_BASE_CURRENCY,
     currency,
+})
+
+export const changeCurrencyAmount = amount => ({
+    type: CHANGE_CURRENCY_AMOUNT,
+    amount: parseFloat(amount),
 })
 
 export const changeQuoteCurrency = currency => ({
