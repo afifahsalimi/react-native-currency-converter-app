@@ -1,0 +1,6 @@
+module Pods_RNCurrencyConverter {
+  umbrella header "Pods-RNCurrencyConverter-umbrella.h"
+
+  export *
+  module * { export * }
+}
