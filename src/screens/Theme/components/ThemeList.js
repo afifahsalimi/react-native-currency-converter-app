@@ -4,15 +4,17 @@ import { StyleSheet, TouchableOpacity, Text, View } from 'react-native'
 import Colors from '@utils/colors'
 
 const ThemeList = (props) => {
+
+  const { onPress, title, color, themeColor } = props
   return (
     <TouchableOpacity
-      style={[styles.shadow, styles.listContainer]}
-      onPress={props.onPress}
+      style={[styles.shadow, styles.listContainer, { shadowColor: themeColor.primary }]}
+      onPress={onPress}
       activeOpacity={0.8}
     >
-      <Text style={{ color: Colors.darkblue, fontSize: 16 }}>{props.title}</Text>
+      <Text style={{ color: Colors.font, fontSize: 16 }}>{title}</Text>
       <View
-        style={[styles.circleContainer, { backgroundColor: props.color }]}
+        style={[styles.circleContainer, { backgroundColor: color }]}
       />
     </TouchableOpacity>
   )
@@ -31,7 +33,6 @@ const styles = StyleSheet.create({
   shadow: {
     elevation: 2,
     shadowOffset: { width: 4.5, height: 4.5 },
-    shadowColor: Colors.shadowBlue,
     shadowOpacity: 0.25,
     shadowRadius: 5,
   },

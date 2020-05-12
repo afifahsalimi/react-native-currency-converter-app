@@ -1,13 +1,18 @@
-module.exports = {
-  darkblue: '#2D3974',
-  blue: '#4161FF',
-  black: '#000000',
+export default {
+  blue: {
+    primary: '#4161FF',
+    accent: '#F5F9FF',
+    background: require('@assets/full-background-1.jpg')
+  },
+  darkblue: {
+    primary: '#2D3974',
+    accent: '#EFF1FF',
+    background: require('@assets/full-background-2.jpg')
+  },
+
   green: '#00E081',
 
-  darkblue: '#2D3974',
-  
-  lightblue: '#F5F9FF',
   lightgrey: '#F4F4F4',
-  
-  shadowBlue: '#4161FF',
+
+  font: '#161E48'
 }

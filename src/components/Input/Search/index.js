@@ -1,27 +1,35 @@
 import React from 'react'
 import { View, TextInput } from 'react-native'
 import { Icon } from 'react-native-elements'
-
 import styles from './styles'
-import Colors from '@utils/colors'
 
 const SearchInput = ({
+  themeColor,
   ...props
-}) => (
-    <View style={styles.searchContainer}>
+}) => {
+
+  return (
+    <View style={[
+      styles.searchContainer,
+      { backgroundColor: themeColor.accent }
+    ]}>
       <Icon
         name='search'
         type='feather'
-        color={Colors.blue}
+        color={themeColor.primary}
         size={15}
       />
       <TextInput
-        style={styles.searchTInput}
+        style={[
+          styles.searchTInput,
+          { color: themeColor.primary }
+        ]}
         placeholder='Search'
-        placeholderTextColor={Colors.blue}
+        placeholderTextColor={themeColor.primary}
         {...props}
       />
     </View>
   )
+}
 
 export default SearchInput

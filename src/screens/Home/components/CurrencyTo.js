@@ -13,9 +13,9 @@ import { Icon } from 'react-native-elements'
 import Colors from '@utils/colors'
 
 const CurrencyTo = (props) => {
-    const { currency, onPress, descText, value } = props
+    const { currency, onPress, value, themeColor } = props
     return (
-        <View style={[styles.boxContainer, styles.shadow]}>
+        <View style={[styles.boxContainer, styles.shadow, { shadowColor: themeColor.primary }]}>
             <TextInput
                 editable={false}
                 style={styles.value2TInput}
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     shadow: {
         elevation: 5,
         shadowOffset: { width: 4.5, height: 4.5 },
-        shadowColor: Colors.shadowBlue,
         shadowOpacity: 0.25,
         shadowRadius: 5,
     },
@@ -66,6 +65,7 @@ const styles = StyleSheet.create({
         fontSize: Platform.OS == 'ios' ? 50 : 44,
         height: 60,
         padding: 0,
+        color: Colors.font
     },
     currencyContainer: {
         flexDirection: 'row',
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     initialText: {
         fontSize: 18,
         fontWeight: 'bold',
+        color: Colors.font
     },
     optionButton: {
         flexDirection: 'row',
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     descText: {
         fontSize: 14,
         marginRight: 8,
+        color: Colors.font
     },
 })
 

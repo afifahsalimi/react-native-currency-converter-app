@@ -5,13 +5,21 @@ import {
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 
-import Colors from '@utils/colors'
-
 const ExchangeButton = (props) => {
+
+    const { onPress, themeColor } = props
+    
     return (
         <TouchableOpacity
-            style={[styles.swapButton, styles.shadow]}
-            onPress={props.onPress}
+            style={[
+                styles.swapButton,
+                styles.shadow,
+                {
+                    backgroundColor: themeColor.primary,
+                    shadowColor: themeColor.primary
+                }
+            ]}
+            onPress={onPress}
             activeOpacity={0.8}
         >
             <Icon
@@ -30,7 +38,6 @@ const styles = StyleSheet.create({
         width: 44,
         borderRadius: 22,
         position: 'absolute',
-        backgroundColor: Colors.blue,
         right: 0,
         marginRight: 16,
         top: 118,
@@ -40,7 +47,6 @@ const styles = StyleSheet.create({
     shadow: {
         elevation: 10,
         shadowOffset: { width: 4.5, height: 4.5 },
-        shadowColor: Colors.shadowBlue,
         shadowOpacity: 0.25,
         shadowRadius: 5,
     },

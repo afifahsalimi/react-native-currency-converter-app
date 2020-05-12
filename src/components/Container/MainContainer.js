@@ -8,7 +8,7 @@ import {
 const MainContainer = (props) => (
   <View style={styles.mainContainer}>
     <ImageBackground
-      source={require('@assets/full-background-1.jpg')}
+      source={props.backgroundImage}
       style={styles.imageContainer}
       resizeMode='stretch'
     >

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   View,
@@ -6,7 +6,6 @@ import {
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
-import Colors from '@utils/colors'
 import { Header1 } from '@components/Header'
 import { SearchInput } from '@components/Input'
 import { SafeView } from '@components/Container'
@@ -19,15 +18,25 @@ import {
 const CurrencyScreen = (props) => {
 
   const { navigation, route } = props
+  const [filteredCurrencies, setFilteredCurrencies] = useState(currencies)
   const dispatch = useDispatch()
   const baseCurrency = useSelector(state => state.currency.baseCurrency)
   const quoteCurrency = useSelector(state => state.currency.quoteCurrency)
+  const themeColor = useSelector(state => state.theme.color)
 
   const { type } = route.params
 
   let comparisonCurrency = baseCurrency
   if (type === 'quote') {
     comparisonCurrency = quoteCurrency
+  }
+
+  const onSearchCurrency = (text) => {
+    const fCurrencies = currencies.filter((currency => (
+      currency.base.includes(text.toUpperCase()) ||
+      currency.desc.toUpperCase().includes(text.toUpperCase())
+    )))
+    setFilteredCurrencies(fCurrencies)
   }
 
   const onSelectCurrency = (currency) => {
@@ -49,19 +58,22 @@ const CurrencyScreen = (props) => {
       <Header1
         onPress={onPressClose}
         titleText='Choose a currency'
-        titleColor={Colors.darkblue}
+        titleColor={themeColor.primary}
         titleSize={18}
         iconName='close'
         iconType='antdesign'
         iconSize={25}
-        iconColor={Colors.blue}
+        iconColor={themeColor.primary}
       />
       <View style={styles.outerContainer}>
-        <SearchInput />
+        <SearchInput 
+          themeColor={themeColor}
+          onChangeText={(text) => onSearchCurrency(text)}
+        />
         <FlatList
           contentContainerStyle={styles.flatlistContainer}
           ItemSeparatorComponent={ListSeparator}
-          data={currencies}
+          data={filteredCurrencies}
           renderItem={({ item, index, separators }) => (
             <ListItem
               image={item.image}
@@ -81,13 +93,6 @@ const CurrencyScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-  },
-  shadow: {
-    elevation: 2,
-    shadowOffset: { width: 4.5, height: 4.5 },
-    shadowColor: Colors.shadowBlue,
-    shadowOpacity: 0.25,
-    shadowRadius: 5,
   },
   outerContainer: {
     flex: 1,

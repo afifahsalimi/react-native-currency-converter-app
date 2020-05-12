@@ -20,8 +20,8 @@ const HomeScreen = (props) => {
   const { alertWithType } = props
 
   const dispatch = useDispatch()
-
   const currencies = useSelector(state => state.currency)
+  const themeColor = useSelector(state => state.theme.color)
   const { baseCurrency, quoteCurrency, amount } = currencies
   const conversionSelector = useSelector(state => state.currency.conversions[baseCurrency] || {})
   const rates = conversionSelector.rates || {}
@@ -73,7 +73,7 @@ const HomeScreen = (props) => {
   }, [currencyError])
 
   return (
-    <MainContainer>
+    <MainContainer backgroundImage={themeColor.background}>
       <SafeView>
         <Header1
           onPress={onPressMenu}
@@ -91,15 +91,18 @@ const HomeScreen = (props) => {
               onPress={() => onPressBase()}
               defaultValue={amount.toString()}
               onChangeText={handleChangeText}
+              themeColor={themeColor}
             />
             <View style={{ height: 16 }} />
             <CurrencyTo
               currency={getCurrencyDetails(quoteCurrency)}
               onPress={() => onPressQuote()}
               value={quotePrice}
+              themeColor={themeColor}
             />
             <ExchangeButton
               onPress={() => onPressSwap()}
+              themeColor={themeColor}
             />
           </View>
           <RateText
@@ -107,6 +110,7 @@ const HomeScreen = (props) => {
             conversionRate={conversionRate}
             quoteCurrency={quoteCurrency}
             date={lastConvertedDate}
+            themeColor={themeColor}
           />
         </View>
       </SafeView>

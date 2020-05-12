@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     initialText: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: Colors.darkblue,
+        color: Colors.font,
         marginLeft: 10,
         marginRight: 14,
     },
     descText: {
         fontSize: 14,
-        color: Colors.darkblue,
+        color: Colors.font,
         flex: 1,
     }
 })
